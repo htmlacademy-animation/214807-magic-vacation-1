@@ -26,6 +26,10 @@
   }
 }
 
+.social-block__list {
+  transition : opacity 300ms 10ms;
+}
+
 .social-block__link {
   transition : color 300ms, background-color 450ms ease-in-out, border 300ms ease-in-out;
 }
