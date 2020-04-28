@@ -42,6 +42,13 @@
   animation : move-in 500ms ease-in-out;
 }
 
+.swiper-slide-next,
+.swiper-slide-active {
+  .slider__item-text {
+    animation : fade-in 780ms ease-in;
+  }
+}
+
 @keyframes move-in {
   from {
     transform : translateX(100%);
