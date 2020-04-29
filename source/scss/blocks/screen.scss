@@ -353,6 +353,10 @@
   }
 }
 
+.screen--rules {
+  background-color: $c-dark;
+}
+
 .loaded .screen__footer {
   transform: translateY(0);
 }

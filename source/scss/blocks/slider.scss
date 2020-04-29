@@ -176,6 +176,7 @@
     display: block;
     width: 1rem;
     height: 2rem;
+    pointer-events: none;
 
     @media (min-width: $stop-scaling) {
       width: 10px;
@@ -272,14 +273,5 @@
       height: 0.4rem;
       background-color: $c-light;
     }
-  }
-}
-
-.swiper-slide-next,
-.swiper-slide-active {
-  .slider__item-text {
-    animation-name: fade-in;
-    animation-duration: 780ms;
-    animation-timing-function: ease-in;
   }
 }

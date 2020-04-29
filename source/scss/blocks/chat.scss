@@ -113,6 +113,7 @@
       width: 100%;
       color: $c-dark;
       background-color: $c-light;
+      word-break: break-word;
     }
   }
 
@@ -123,6 +124,7 @@
     p {
       color: $c-light;
       background-color: $c-purple;
+      word-break: break-word;
     }
   }
 }
@@ -183,8 +185,4 @@
 
 .chat__footer {
   margin-top: auto;
-
-  animation-name: move-in;
-  animation-duration: 780ms;
-  animation-timing-function: ease-in-out;
 }
