@@ -10625,8 +10625,8 @@ Object(_modules_social_js__WEBPACK_IMPORTED_MODULE_7__["default"])();
 const fullPageScroll = new _modules_full_page_scroll__WEBPACK_IMPORTED_MODULE_8__["default"]();
 fullPageScroll.init();
 
-window.addEventListener("load", (event) => {
-  document.body.classList.add('loaded');
+window.addEventListener(`load`, () => {
+  document.body.classList.add(`loaded`);
 });
 
 
