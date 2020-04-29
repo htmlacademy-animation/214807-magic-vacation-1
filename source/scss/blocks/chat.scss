@@ -183,4 +183,8 @@
 
 .chat__footer {
   margin-top: auto;
+
+  animation-name: move-in;
+  animation-duration: 780ms;
+  animation-timing-function: ease-in-out;
 }

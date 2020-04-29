@@ -274,3 +274,12 @@
     }
   }
 }
+
+.swiper-slide-next,
+.swiper-slide-active {
+  .slider__item-text {
+    animation-name: fade-in;
+    animation-duration: 780ms;
+    animation-timing-function: ease-in;
+  }
+}
