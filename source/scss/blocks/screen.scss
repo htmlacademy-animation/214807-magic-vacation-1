@@ -291,7 +291,6 @@
 }
 
 .screen--story {
-  background-color: $c-dark;
   background-image: url("../img/slide1.jpg"), url("../img/slide2.jpg"), url("../img/slide3.jpg"), url("../img/slide4.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -303,13 +302,8 @@
   }
 }
 
-.screen--prizes {
-  background-color: $c-dark;
-}
-
 .screen--game {
   position: relative;
-  background-color: $c-dark;
 
   &::before {
     content: "";
@@ -343,7 +337,6 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: $c-dark;
   opacity: 0;
   pointer-events: none;
 
@@ -353,9 +346,12 @@
   }
 }
 
-.screen--rules {
-  background-color: $c-dark;
+.screen.active {
+  &:not(.screen--intro):not(.screen--story) ~ .background-screen {
+    height : 100%;
+  }
 }
+
 
 .loaded .screen__footer {
   transform: translateY(0);
