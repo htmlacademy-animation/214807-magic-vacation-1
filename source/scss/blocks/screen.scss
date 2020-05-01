@@ -346,7 +346,8 @@
   }
 }
 
-.screen--rules {
+.screen--rules,
+.screen--game {
   visibility: visible;
 
   &.screen--hidden {

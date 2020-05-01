@@ -239,25 +239,27 @@ $animationStep: 1s;
 }
 
 
-.screen--rules.active {
-  .rules__title,
-  .rules__lead,
-  .rules__link {
-    opacity   : 1;
+.screen--rules {
+  &.active {
+    .rules__title,
+    .rules__lead,
+    .rules__link {
+      opacity : 1;
+    }
+
+    .rules__item {
+      opacity   : 1;
+      transform : translateX(0);
+    }
   }
 
-  .rules__item {
-    opacity   : 1;
-    transform : translateX(0);
-  }
-}
-
-.screen--rules.screen--hidden {
-  .rules__title,
-  .rules__lead,
-  .rules__link,
-  .rules__item {
-    transition: none;
+  &.screen--hidden {
+    .rules__title,
+    .rules__lead,
+    .rules__link,
+    .rules__item {
+      transition: none;
+    }
   }
 }
 
