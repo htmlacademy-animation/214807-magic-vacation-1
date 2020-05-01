@@ -29,28 +29,28 @@
 
 @keyframes move-from-left {
   from {
-    left    : -100%;
+    transform   : translateX(-100%);
     opacity : 0;
   }
   10% {
     opacity : 1;
   }
   to {
-    left    : 0;
+    transform   : translateX(0);
     opacity : 1;
   }
 }
 
 @keyframes move-from-right {
   from {
-    right   : -100%;
+    transform   : translateX(100%);
     opacity : 0;
   }
   10% {
     opacity : 1;
   }
   to {
-    right   : 0;
+    transform   : translateX(0);
     opacity : 1;
   }
 }

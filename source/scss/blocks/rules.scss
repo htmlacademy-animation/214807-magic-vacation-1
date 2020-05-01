@@ -248,8 +248,7 @@ $animationStep: 1s;
     .rules__link {
       animation-delay: $animationStep * $i;
     }
-  }
-  @else {
+  } @else {
     .rules__item:nth-child(#{$i}) {
       animation-delay: $animationStep * $i;
     }
