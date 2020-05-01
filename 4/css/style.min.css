@@ -920,46 +920,6 @@ img {
   clip: rect(0 0 0 0);
   overflow: hidden; }
 
-@keyframes move-in {
-  from {
-    transform: translateX(100%); }
-  to {
-    transform: none; } }
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(15px); }
-  to {
-    opacity: 1;
-    transform: none; } }
-
-@keyframes appear {
-  from {
-    opacity: 0; }
-  to {
-    opacity: 1; } }
-
-@keyframes move-from-left {
-  from {
-    left: -100%;
-    opacity: 0; }
-  10% {
-    opacity: 1; }
-  to {
-    left: 0;
-    opacity: 1; } }
-
-@keyframes move-from-right {
-  from {
-    right: -100%;
-    opacity: 0; }
-  10% {
-    opacity: 1; }
-  to {
-    right: 0;
-    opacity: 1; } }
-
 .animation-screen {
   position: fixed;
   display: flex;
@@ -2427,10 +2387,8 @@ img {
   font-size: 4.8rem;
   line-height: 0.906;
   letter-spacing: -0.04em;
-  animation-name: appear;
-  animation-fill-mode: both;
-  animation-duration: 1s;
-  animation-delay: 0.5s; }
+  opacity: 0;
+  transition: opacity 1000ms ease-in-out 500ms; }
   @media (min-width: 2000px) {
     .rules__title {
       margin-bottom: 50px;
@@ -2454,10 +2412,8 @@ img {
   text-transform: uppercase;
   font-size: 2.4rem;
   line-height: 1.2;
-  animation-name: appear;
-  animation-fill-mode: both;
-  animation-duration: 1s;
-  animation-delay: 0.5s; }
+  opacity: 0;
+  transition: opacity 1000ms ease-in-out 500ms; }
   @media (min-width: 2000px) {
     .rules__lead {
       margin-left: 58px;
@@ -2512,14 +2468,14 @@ img {
   padding-top: 0.6rem;
   padding-left: 6.5rem;
   break-inside: avoid;
-  animation-duration: 1s;
-  animation-fill-mode: both;
-  animation-delay: 1s;
-  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
+  opacity: 0;
+  transition-property: transform, opacity;
+  transition-duration: 1s;
+  transition-timing-function: ease-in-out; }
   .rules__item:nth-child(1), .rules__item:nth-child(2) {
-    animation-name: move-from-left; }
+    transform: translateX(-100%); }
   .rules__item:nth-child(3), .rules__item:nth-child(4) {
-    animation-name: move-from-right; }
+    transform: translateX(100%); }
   @media (min-width: 2000px) {
     .rules__item {
       margin: 0 0 62px;
@@ -2575,9 +2531,8 @@ img {
   position: absolute;
   bottom: 6rem;
   right: 5.6rem;
-  animation-name: appear;
-  animation-duration: 1s;
-  animation-fill-mode: both; }
+  opacity: 0;
+  transition: opacity 1s ease-out; }
   @media (min-width: 2000px) {
     .rules__link {
       bottom: 60px;
@@ -2595,20 +2550,35 @@ img {
       bottom: 2rem;
       right: 1.5rem; } }
 
+.screen--rules.active .rules__title,
+.screen--rules.active .rules__lead,
+.screen--rules.active .rules__link {
+  opacity: 1; }
+
+.screen--rules.active .rules__item {
+  opacity: 1;
+  transform: translateX(0); }
+
+.screen--rules.screen--hidden .rules__title,
+.screen--rules.screen--hidden .rules__lead,
+.screen--rules.screen--hidden .rules__link,
+.screen--rules.screen--hidden .rules__item {
+  transition: none; }
+
 .rules__item:nth-child(1) {
-  animation-delay: 1s; }
+  transition-delay: 1s; }
 
 .rules__item:nth-child(2) {
-  animation-delay: 2s; }
+  transition-delay: 2s; }
 
 .rules__item:nth-child(3) {
-  animation-delay: 3s; }
+  transition-delay: 3s; }
 
 .rules__item:nth-child(4) {
-  animation-delay: 4s; }
+  transition-delay: 4s; }
 
 .rules__link {
-  animation-delay: 5s; }
+  transition-delay: 5s; }
 
 .screen {
   position: relative;
@@ -2917,6 +2887,12 @@ img {
   .screen--result.screen--show {
     opacity: 1;
     pointer-events: auto; }
+
+.screen--rules {
+  visibility: visible; }
+  .screen--rules.screen--hidden {
+    display: flex;
+    visibility: hidden; }
 
 .screen.active:not(.screen--intro):not(.screen--story) ~ .background-screen {
   height: 100%; }
