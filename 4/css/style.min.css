@@ -2520,12 +2520,6 @@ img {
     animation-name: move-from-left; }
   .rules__item:nth-child(3), .rules__item:nth-child(4) {
     animation-name: move-from-right; }
-  .rules__item:nth-child(2) {
-    animation-delay: 2s; }
-  .rules__item:nth-child(3) {
-    animation-delay: 3s; }
-  .rules__item:nth-child(4) {
-    animation-delay: 4s; }
   @media (min-width: 2000px) {
     .rules__item {
       margin: 0 0 62px;
@@ -2583,8 +2577,7 @@ img {
   right: 5.6rem;
   animation-name: appear;
   animation-duration: 1s;
-  animation-fill-mode: both;
-  animation-delay: 5s; }
+  animation-fill-mode: both; }
   @media (min-width: 2000px) {
     .rules__link {
       bottom: 60px;
@@ -2601,6 +2594,21 @@ img {
     .rules__link {
       bottom: 2rem;
       right: 1.5rem; } }
+
+.rules__item:nth-child(1) {
+  animation-delay: 1s; }
+
+.rules__item:nth-child(2) {
+  animation-delay: 2s; }
+
+.rules__item:nth-child(3) {
+  animation-delay: 3s; }
+
+.rules__item:nth-child(4) {
+  animation-delay: 4s; }
+
+.rules__link {
+  animation-delay: 5s; }
 
 .screen {
   position: relative;
