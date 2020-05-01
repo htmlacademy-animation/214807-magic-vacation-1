@@ -1866,6 +1866,7 @@ img {
       outline: none; }
       .page-header__menu a:hover::after, .page-header__menu a:focus::after {
         opacity: 1;
+        width: 100%;
         background-color: #a67ee5; }
 
 .page-header__social {
@@ -2894,9 +2895,11 @@ img {
     pointer-events: auto; }
 
 .screen--rules,
+.screen--story,
 .screen--game {
   visibility: visible; }
   .screen--rules.screen--hidden,
+  .screen--story.screen--hidden,
   .screen--game.screen--hidden {
     display: flex;
     visibility: hidden; }
@@ -2979,7 +2982,9 @@ img {
   margin-bottom: 0;
   max-width: 34rem;
   font-size: 1.8rem;
-  line-height: 2rem; }
+  line-height: 2rem;
+  opacity: 0;
+  transition: opacity 1.5s; }
   @media (min-width: 2000px) {
     .slider__item-text {
       margin-top: 36px;
@@ -3035,7 +3040,8 @@ img {
   position: relative;
   width: 4rem;
   height: 4rem;
-  color: #5f458c; }
+  color: #5f458c;
+  transition: all 150ms; }
   .slider__control:focus {
     outline: none; }
   @media (min-width: 2000px) {
@@ -3053,7 +3059,8 @@ img {
     background-color: #ffffff;
     border: 2px solid #ffffff;
     border-radius: 50%;
-    z-index: -1; }
+    z-index: -1;
+    transition: all 150ms; }
   .slider__control svg {
     position: absolute;
     top: 50%;
@@ -3135,6 +3142,10 @@ img {
         width: 0.4rem;
         height: 0.4rem;
         background-color: #ffffff; } }
+
+.active .swiper-slide-active .slider__item-text,
+.active .swiper-slide-next .slider__item-text {
+  opacity: 1; }
 
 .social-block {
   position: relative; }
