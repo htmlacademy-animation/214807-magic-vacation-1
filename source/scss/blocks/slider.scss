@@ -95,6 +95,8 @@
   max-width: 34rem;
   font-size: 1.8rem;
   line-height: 2rem;
+  opacity: 0;
+  transition: opacity 1.5s;
 
   @media (min-width: $stop-scaling) {
     margin-top: 36px;
@@ -154,6 +156,7 @@
   width: 4rem;
   height: 4rem;
   color: $c-dark;
+  transition: all 150ms;
 
   @media (min-width: $stop-scaling) {
     width: 40px;
@@ -169,6 +172,7 @@
     border: 2px solid $c-light;
     border-radius: 50%;
     z-index: -1;
+    transition: all 150ms;
   }
 
   svg {
@@ -272,6 +276,15 @@
       width: 0.4rem;
       height: 0.4rem;
       background-color: $c-light;
+    }
+  }
+}
+
+.active {
+  .swiper-slide-active,
+  .swiper-slide-next {
+    .slider__item-text {
+      opacity : 1;
     }
   }
 }
