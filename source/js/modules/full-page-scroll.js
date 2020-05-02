@@ -1,4 +1,5 @@
-import throttle from 'lodash/throttle';
+import throttle   from 'lodash/throttle';
+import animations from './animations';
 
 export default class FullPageScroll {
   constructor() {
@@ -47,6 +48,13 @@ export default class FullPageScroll {
     });
     this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
     this.screenElements[this.activeScreen].classList.add(`active`);
+
+    if (this.activeScreen === 0) {
+      animations.forEach((item) => item.runAnimation());
+    }
+    else {
+      animations.forEach((item) => item.destroyAnimation());
+    }
   }
 
   changeActiveMenuItem() {

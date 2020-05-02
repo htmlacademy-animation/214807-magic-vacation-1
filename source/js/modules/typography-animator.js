@@ -1,39 +1,61 @@
 export default class TypographyAnimator {
 
-  constructor ({ time, properties, classForActivate }, elementSelector = null) {
+  constructor (
+    elementSelector,
+    { time, properties, classForActivate, timingFunction, transitionDelay }
+    ) {
     this.TEXT_CSS_CLASS = `animated-text`;
     this.WORD_CSS_CLASS = `animated-text__word`;
     this.DELAY_STEP     = 50;
 
-    this.animationTime       = time;
-    this.animationProperties = properties;
-    this.classForActivate    = classForActivate || `active`;
-    this.elementSelector     = elementSelector;
-    this.element             = this.getAnimatedElement(this.elementSelector);
+    this.transitionTime           = time;
+    this.transitionProperties     = properties;
+    this.transitionTimingFunction = timingFunction || `ease`;
+    this.transitionDelay          = transitionDelay || 0;
+    this.classForActivate         = classForActivate || `active`;
+    this.elementSelector          = elementSelector;
+    this.element                  = this.getAnimatedElement(this.elementSelector);
+  }
 
-    this.prePareText();
+  init () {
+    this.prepareText();
   }
 
   runAnimation () {
-    if (!this.element) {
-      return;
+    if (this.element) {
+      setTimeout(() => {
+        this.element.classList.add(this.classForActivate);
+      });
     }
-    this.element.classList.add(this.classForActivate);
   }
 
   destroyAnimation () {
     this.element.classList.remove(this.classForActivate);
   }
 
-  prePareText () {
+  prepareText () {
+    const content = this.getPreparedContent();
+
     this.element.classList.add(this.TEXT_CSS_CLASS);
+    this.element.innerHTML = ``;
+    this.element.appendChild(content);
+  }
 
-    const text = this.element.textContent.trim().split(' ').filter((latter) => latter !== '');
+  getAnimatedElement (elementSelector) {
+    return elementSelector ? document.querySelector(elementSelector) : null;
+  }
 
-    const content = text.reduce((fragmentParent, word, index) => {
+  getText () {
+    return this.element.textContent.trim().split(' ').filter((latter) => latter !== '');
+  }
+
+  getPreparedContent () {
+    const text = this.getText();
+
+    return text.reduce((fragmentParent, word, index) => {
       const prevWordLength = index ? text[index - 1].length : 0;
-      const wordElement   = this.getWordElement(word, prevWordLength);
-      const wordContainer = document.createElement(`div`);
+      const wordElement    = this.getWordElement(word, prevWordLength);
+      const wordContainer  = document.createElement(`div`);
 
       wordContainer.classList.add(this.WORD_CSS_CLASS);
       wordContainer.appendChild(wordElement);
@@ -41,13 +63,6 @@ export default class TypographyAnimator {
 
       return fragmentParent;
     }, document.createDocumentFragment());
-
-    this.element.innerHTML = ``;
-    this.element.appendChild(content);
-  }
-
-  getAnimatedElement (elementSelector) {
-    return elementSelector ? document.querySelector(elementSelector) : null;
   }
 
   getWordElement (word, prevWordLength) {
@@ -64,9 +79,9 @@ export default class TypographyAnimator {
     const span       = document.createElement(`span`);
     span.textContent = letter;
 
-    span.style.transitionProperty       = this.animationProperties.join(', ');
-    span.style.transitionDuration       = `${this.animationTime}ms`;
-    span.style.transitionTimingFunction = `ease`;
+    span.style.transitionProperty       = this.transitionProperties.join(', ');
+    span.style.transitionDuration       = `${this.transitionTime}ms`;
+    span.style.transitionTimingFunction = this.transitionTimingFunction;
     span.style.transitionDelay          = `${this.getDelay(index)}ms`;
 
     return span;
@@ -88,6 +103,6 @@ export default class TypographyAnimator {
       delay = this.DELAY_STEP * index;
     }
 
-    return delay;
+    return delay + this.transitionDelay;
   }
 }
