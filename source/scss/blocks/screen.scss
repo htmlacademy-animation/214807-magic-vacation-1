@@ -346,6 +346,17 @@
   }
 }
 
+.screen--rules,
+.screen--story,
+.screen--game {
+  visibility: visible;
+
+  &.screen--hidden {
+    display    : flex;
+    visibility : hidden;
+  }
+}
+
 .screen.active {
   &:not(.screen--intro):not(.screen--story) ~ .background-screen {
     height : 100%;

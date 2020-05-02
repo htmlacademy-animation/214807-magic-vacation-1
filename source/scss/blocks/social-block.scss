@@ -89,9 +89,7 @@
   top: 100%;
   right: 0;
   margin-top: 1.5rem;
-  opacity: 0;
   pointer-events: none;
-  transition : opacity 400ms 10ms;
 
   @media (min-width: $stop-scaling) {
     margin-top: 15px;
@@ -131,23 +129,43 @@
   }
 
   &:hover {
-    opacity: 1;
     pointer-events: auto;
+    li {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   &:focus-within {
-    opacity: 1;
     pointer-events: auto;
+
+    li {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .social-block--active & {
-    opacity: 1;
     pointer-events: auto;
+
+    li {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   li {
     flex: none;
     margin-bottom: 0.5rem;
+    opacity: 0;
+    transition : all 150ms;
+    transform: translateY(-100%);
+
+    @for $i from 1 through 3 {
+      &:nth-child(#{$i}) {
+        transition-delay: 150ms * $i;
+      }
+    }
 
     @media (min-width: $stop-scaling) {
       margin-bottom: 5px;

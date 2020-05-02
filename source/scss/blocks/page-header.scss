@@ -253,13 +253,15 @@
       content: "";
       position: absolute;
       bottom: 0;
-      width: 0;
+      width: 100%;
       height: 2px;
       background-color: $c-light;
       display: block;
       left: 0;
       opacity: 0;
-      transition: background-color 400ms, width 350ms;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: all 400ms, width 350ms;
 
       @media (min-width: $stop-scaling) {
         left: -5px;
@@ -280,10 +282,13 @@
     }
 
     &.active {
+      color: $c-purple;
+
       &::after {
         display: block;
-        width   : 100%;
-        opacity : 1;
+        background-color: $c-purple;
+        opacity: 1;
+        transform: scaleX(1);
       }
     }
 
@@ -295,6 +300,7 @@
       &::after {
         opacity: 1;
         background-color: $c-purple;
+        transform: scaleX(1);
       }
     }
   }
