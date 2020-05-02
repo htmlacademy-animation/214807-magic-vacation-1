@@ -282,8 +282,11 @@
     }
 
     &.active {
+      color: $c-purple;
+
       &::after {
         display: block;
+        background-color: $c-purple;
         opacity: 1;
         transform: scaleX(1);
       }
