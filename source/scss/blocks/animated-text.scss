@@ -1,0 +1,15 @@
+.animated-text__word {
+  display     : inline-block;
+  white-space : nowrap;
+}
+
+.animated-text__word > span {
+  transform : translate3d(0, 1em, 0);
+  opacity   : 0;
+  display   : inline-block;
+}
+
+.animated-text.active .animated-text__word > span {
+  transform : translate3d(0, 0, 0);
+  opacity   : 1;
+}
