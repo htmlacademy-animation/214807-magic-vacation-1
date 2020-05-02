@@ -10107,6 +10107,37 @@ module.exports = code;
 
 /***/ }),
 
+/***/ "./source/js/modules/animations.js":
+/*!*****************************************!*\
+  !*** ./source/js/modules/animations.js ***!
+  \*****************************************/
+/*! exports provided: introTitleTypographyAnimator, introDateTypographyAnimator */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "introTitleTypographyAnimator", function() { return introTitleTypographyAnimator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "introDateTypographyAnimator", function() { return introDateTypographyAnimator; });
+/* harmony import */ var _typography_animator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./typography-animator */ "./source/js/modules/typography-animator.js");
+
+
+const introTitleTypographyAnimator = new _typography_animator__WEBPACK_IMPORTED_MODULE_0__["default"](
+  '.intro__title',
+  { time: 1000, properties: ['transform', 'opacity'] },
+);
+const introDateTypographyAnimator  = new _typography_animator__WEBPACK_IMPORTED_MODULE_0__["default"](
+  '.intro__date',
+  { time: 1000, properties: ['transform', 'opacity'], transitionDelay: 500 },
+);
+
+introTitleTypographyAnimator.init();
+introDateTypographyAnimator.init();
+
+
+
+
+/***/ }),
+
 /***/ "./source/js/modules/chat.js":
 /*!***********************************!*\
   !*** ./source/js/modules/chat.js ***!
@@ -10275,6 +10306,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return FullPageScroll; });
 /* harmony import */ var lodash_throttle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/throttle */ "./node_modules/lodash/throttle.js");
 /* harmony import */ var lodash_throttle__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_throttle__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _animations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./animations */ "./source/js/modules/animations.js");
+
 
 
 class FullPageScroll {
@@ -10324,6 +10357,15 @@ class FullPageScroll {
     });
     this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
     this.screenElements[this.activeScreen].classList.add(`active`);
+
+    if (this.activeScreen === 0) {
+      _animations__WEBPACK_IMPORTED_MODULE_1__["introTitleTypographyAnimator"].runAnimation();
+      _animations__WEBPACK_IMPORTED_MODULE_1__["introDateTypographyAnimator"].runAnimation();
+    }
+    else {
+      _animations__WEBPACK_IMPORTED_MODULE_1__["introTitleTypographyAnimator"].destroyAnimation();
+      _animations__WEBPACK_IMPORTED_MODULE_1__["introDateTypographyAnimator"].destroyAnimation();
+    }
   }
 
   changeActiveMenuItem() {
@@ -10595,40 +10637,62 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TypographyAnimator; });
 class TypographyAnimator {
 
-  constructor ({ time, properties, classForActivate }, elementSelector = null) {
+  constructor (
+    elementSelector,
+    { time, properties, classForActivate, timingFunction, transitionDelay }
+    ) {
     this.TEXT_CSS_CLASS = `animated-text`;
     this.WORD_CSS_CLASS = `animated-text__word`;
     this.DELAY_STEP     = 50;
 
-    this.animationTime       = time;
-    this.animationProperties = properties;
-    this.classForActivate    = classForActivate || `active`;
-    this.elementSelector     = elementSelector;
-    this.element             = this.getAnimatedElement(this.elementSelector);
+    this.transitionTime           = time;
+    this.transitionProperties     = properties;
+    this.transitionTimingFunction = timingFunction || `ease`;
+    this.transitionDelay          = transitionDelay || 0;
+    this.classForActivate         = classForActivate || `active`;
+    this.elementSelector          = elementSelector;
+    this.element                  = this.getAnimatedElement(this.elementSelector);
+  }
 
-    this.prePareText();
+  init () {
+    this.prepareText();
   }
 
   runAnimation () {
-    if (!this.element) {
-      return;
+    if (this.element) {
+      setTimeout(() => {
+        this.element.classList.add(this.classForActivate);
+      });
     }
-    this.element.classList.add(this.classForActivate);
   }
 
   destroyAnimation () {
     this.element.classList.remove(this.classForActivate);
   }
 
-  prePareText () {
+  prepareText () {
+    const content = this.getPreparedContent();
+
     this.element.classList.add(this.TEXT_CSS_CLASS);
+    this.element.innerHTML = ``;
+    this.element.appendChild(content);
+  }
 
-    const text = this.element.textContent.trim().split(' ').filter((latter) => latter !== '');
+  getAnimatedElement (elementSelector) {
+    return elementSelector ? document.querySelector(elementSelector) : null;
+  }
 
-    const content = text.reduce((fragmentParent, word, index) => {
+  getText () {
+    return this.element.textContent.trim().split(' ').filter((latter) => latter !== '');
+  }
+
+  getPreparedContent () {
+    const text = this.getText();
+
+    return text.reduce((fragmentParent, word, index) => {
       const prevWordLength = index ? text[index - 1].length : 0;
-      const wordElement   = this.getWordElement(word, prevWordLength);
-      const wordContainer = document.createElement(`div`);
+      const wordElement    = this.getWordElement(word, prevWordLength);
+      const wordContainer  = document.createElement(`div`);
 
       wordContainer.classList.add(this.WORD_CSS_CLASS);
       wordContainer.appendChild(wordElement);
@@ -10636,13 +10700,6 @@ class TypographyAnimator {
 
       return fragmentParent;
     }, document.createDocumentFragment());
-
-    this.element.innerHTML = ``;
-    this.element.appendChild(content);
-  }
-
-  getAnimatedElement (elementSelector) {
-    return elementSelector ? document.querySelector(elementSelector) : null;
   }
 
   getWordElement (word, prevWordLength) {
@@ -10659,9 +10716,9 @@ class TypographyAnimator {
     const span       = document.createElement(`span`);
     span.textContent = letter;
 
-    span.style.transitionProperty       = this.animationProperties.join(', ');
-    span.style.transitionDuration       = `${this.animationTime}ms`;
-    span.style.transitionTimingFunction = `ease`;
+    span.style.transitionProperty       = this.transitionProperties.join(', ');
+    span.style.transitionDuration       = `${this.transitionTime}ms`;
+    span.style.transitionTimingFunction = this.transitionTimingFunction;
     span.style.transitionDelay          = `${this.getDelay(index)}ms`;
 
     return span;
@@ -10679,11 +10736,8 @@ class TypographyAnimator {
     else if ((index + 1) % 3 === 0) {
       delay = this.DELAY_STEP * (index - 1);
     }
-    else {
-      delay = this.DELAY_STEP * index;
-    }
 
-    return delay;
+    return delay + this.transitionDelay;
   }
 }
 
@@ -10708,9 +10762,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_form_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/form.js */ "./source/js/modules/form.js");
 /* harmony import */ var _modules_social_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/social.js */ "./source/js/modules/social.js");
 /* harmony import */ var _modules_full_page_scroll__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/full-page-scroll */ "./source/js/modules/full-page-scroll.js");
-/* harmony import */ var _modules_typography_animator__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/typography-animator */ "./source/js/modules/typography-animator.js");
 // modules
-
 
 
 
@@ -10731,22 +10783,11 @@ Object(_modules_result_js__WEBPACK_IMPORTED_MODULE_5__["default"])();
 Object(_modules_form_js__WEBPACK_IMPORTED_MODULE_6__["default"])();
 Object(_modules_social_js__WEBPACK_IMPORTED_MODULE_7__["default"])();
 
-const introTitleTypographyAnimator = new _modules_typography_animator__WEBPACK_IMPORTED_MODULE_9__["default"](
-  { time: 1000, properties: ['transform', 'opacity'] },
-  '.intro__title',
-);
-const introDateTypographyAnimator  = new _modules_typography_animator__WEBPACK_IMPORTED_MODULE_9__["default"](
-  { time: 1000, properties: ['transform', 'opacity'] },
-  '.intro__date',
-);
-
 const fullPageScroll = new _modules_full_page_scroll__WEBPACK_IMPORTED_MODULE_8__["default"]();
 fullPageScroll.init();
 
 window.addEventListener(`load`, () => {
   document.body.classList.add(`loaded`);
-  introTitleTypographyAnimator.runAnimation();
-  introDateTypographyAnimator.runAnimation();
 });
 
 
