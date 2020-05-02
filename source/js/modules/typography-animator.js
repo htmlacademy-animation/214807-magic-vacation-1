@@ -99,9 +99,6 @@ export default class TypographyAnimator {
     else if ((index + 1) % 3 === 0) {
       delay = this.DELAY_STEP * (index - 1);
     }
-    else {
-      delay = this.DELAY_STEP * index;
-    }
 
     return delay + this.transitionDelay;
   }

@@ -1,5 +1,8 @@
 import throttle   from 'lodash/throttle';
-import animations from './animations';
+import {
+  introTitleTypographyAnimator,
+  introDateTypographyAnimator,
+} from './animations';
 
 export default class FullPageScroll {
   constructor() {
@@ -50,10 +53,12 @@ export default class FullPageScroll {
     this.screenElements[this.activeScreen].classList.add(`active`);
 
     if (this.activeScreen === 0) {
-      animations.forEach((item) => item.runAnimation());
+      introTitleTypographyAnimator.runAnimation();
+      introDateTypographyAnimator.runAnimation();
     }
     else {
-      animations.forEach((item) => item.destroyAnimation());
+      introTitleTypographyAnimator.destroyAnimation();
+      introDateTypographyAnimator.destroyAnimation();
     }
   }
 

@@ -6,14 +6,13 @@ const introTitleTypographyAnimator = new TypographyAnimator(
 );
 const introDateTypographyAnimator  = new TypographyAnimator(
   '.intro__date',
-  { time: 1000, properties: ['transform', 'opacity'] },
+  { time: 1000, properties: ['transform', 'opacity'], transitionDelay: 500 },
 );
 
 introTitleTypographyAnimator.init();
 introDateTypographyAnimator.init();
 
-
-export default [
+export {
   introTitleTypographyAnimator,
   introDateTypographyAnimator,
-];
+};
