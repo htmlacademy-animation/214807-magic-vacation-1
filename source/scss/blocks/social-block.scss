@@ -128,29 +128,22 @@
     }
   }
 
-  &:hover {
-    pointer-events: auto;
-    li {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  &:focus-within {
+  &:hover,
+  .social-block--active &,
+  &:focus-within  {
     pointer-events: auto;
 
     li {
       opacity: 1;
       transform: translateY(0);
-    }
-  }
+      transition-property : opacity, transform;
+      transition-duration: 50ms;
 
-  .social-block--active & {
-    pointer-events: auto;
-
-    li {
-      opacity: 1;
-      transform: translateY(0);
+      @for $i from 1 through 3 {
+        &:nth-child(#{$i}) {
+          transition-delay: 150ms * $i;
+        }
+      }
     }
   }
 
@@ -158,14 +151,10 @@
     flex: none;
     margin-bottom: 0.5rem;
     opacity: 0;
-    transition : all 150ms;
-    transform: translateY(-100%);
-
-    @for $i from 1 through 3 {
-      &:nth-child(#{$i}) {
-        transition-delay: 150ms * $i;
-      }
-    }
+    transform: translateY(2rem);
+    transition-property: opacity, transform;
+    transition-duration: 150ms;
+    transition-delay: 0ms, 150ms;
 
     @media (min-width: $stop-scaling) {
       margin-bottom: 5px;
