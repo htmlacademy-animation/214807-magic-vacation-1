@@ -1,0 +1,17 @@
+@keyframes roll-to-right {
+  from {
+    transform : translateX(-50vw) rotate(-900deg);
+  }
+  to {
+    transform : translateX(0);
+  }
+}
+
+@keyframes roll-to-left {
+  from {
+    transform : translateX(50vw) rotate(900deg);
+  }
+  to {
+    transform : translateX(0);
+  }
+}
