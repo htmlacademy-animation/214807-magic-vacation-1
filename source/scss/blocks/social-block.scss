@@ -155,6 +155,9 @@
     margin-bottom: 0.5rem;
     opacity: 0;
     transform: translateY(2rem);
+    transition-property: opacity, transform;
+    transition-duration: 50ms, 0ms;
+    transition-delay: 0ms, 100ms;
 
     @media (min-width: $stop-scaling) {
       margin-bottom: 5px;
