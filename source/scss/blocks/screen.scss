@@ -348,7 +348,8 @@
 
 .screen--rules,
 .screen--story,
-.screen--game {
+.screen--game,
+.screen--intro {
   visibility: visible;
 
   &.screen--hidden {
