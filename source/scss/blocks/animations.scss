@@ -1,6 +1,10 @@
 @keyframes roll-to-right {
   from {
-    transform : translateX(-50vw) rotate(-900deg);
+    opacity: 0;
+    transform : translateX(-20rem) rotate(-720deg);
+  }
+  40% {
+    opacity: 1;
   }
   to {
     transform : translateX(0);
@@ -9,7 +13,11 @@
 
 @keyframes roll-to-left {
   from {
-    transform : translateX(50vw) rotate(900deg);
+    opacity: 0;
+    transform : translateX(20rem) rotate(720deg);
+  }
+  40% {
+    opacity: 1;
   }
   to {
     transform : translateX(0);

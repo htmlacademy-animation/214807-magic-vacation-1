@@ -292,7 +292,9 @@
 
   .slider__control--prev,
   .slider__control--next {
-    animation-duration: 2000ms;
+    animation-duration: 780ms;
+    animation-delay: 300ms;
+    animation-fill-mode: both;
     animation-timing-function: cubic-bezier(0.54, 1.25, 0.44, 1.01);
   }
 
