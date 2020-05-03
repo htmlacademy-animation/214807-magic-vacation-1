@@ -1,6 +1,7 @@
 .animated-text__word {
   display     : inline-block;
-  white-space : nowrap;
+  line-height : 1.2em;
+  overflow    : hidden;
 }
 
 .animated-text__word > span {
