@@ -95,7 +95,7 @@
   line-height: 1.27;
   opacity: 0;
   transform: translateY(2rem);
-  transition: transform 1000ms ease;
+  transition: all 780ms ease 150ms;
 
   @media (min-width: $stop-scaling) {
     width: 509px;
@@ -144,6 +144,8 @@
   text-transform: uppercase;
   font-size: 2.4rem;
   line-height: 1.2;
+  opacity: 0;
+  transition: opacity 550ms 500ms;
 
   @media (min-width: $stop-scaling) {
     margin: 0 0 16px;
@@ -166,9 +168,15 @@
   }
 }
 
-.loaded {
-  .intro__message {
-    transform: translateY(0);
-    opacity: 1;
+.screen--intro {
+  &.active {
+    .intro__message {
+      transform : translateY(0);
+      opacity   : 1;
+    }
+
+    .intro__label {
+      opacity: 1;
+    }
   }
 }
