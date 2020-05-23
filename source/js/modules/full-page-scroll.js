@@ -1,4 +1,8 @@
-import throttle from 'lodash/throttle';
+import throttle   from 'lodash/throttle';
+import {
+  introTitleTypographyAnimator,
+  introDateTypographyAnimator,
+} from './animations';
 
 export default class FullPageScroll {
   constructor() {
@@ -46,6 +50,15 @@ export default class FullPageScroll {
     });
     this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
     this.screenElements[this.activeScreen].classList.add(`active`);
+
+    if (this.activeScreen === 0) {
+      introTitleTypographyAnimator.runAnimation();
+      introDateTypographyAnimator.runAnimation();
+    }
+    else {
+      introTitleTypographyAnimator.destroyAnimation();
+      introDateTypographyAnimator.destroyAnimation();
+    }
   }
 
   changeActiveMenuItem() {

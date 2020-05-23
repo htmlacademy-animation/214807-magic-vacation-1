@@ -359,7 +359,9 @@
 }
 
 .screen.active {
+  z-index: 3;
   &:not(.screen--intro):not(.screen--story) ~ .background-screen {
+    z-index: 2;
     height : 100%;
   }
 }
