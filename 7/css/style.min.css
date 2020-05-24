@@ -3000,11 +3000,8 @@ img {
     display: flex;
     visibility: hidden; }
 
-.screen.active {
-  z-index: 3; }
-  .screen.active:not(.screen--intro):not(.screen--story) ~ .background-screen {
-    z-index: 2;
-    height: 100%; }
+.screen.active:not(.screen--intro):not(.screen--story) ~ .background-screen {
+  height: 100%; }
 
 .loaded .screen__footer {
   transform: translateY(0); }
