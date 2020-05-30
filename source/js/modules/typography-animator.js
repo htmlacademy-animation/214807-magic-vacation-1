@@ -3,7 +3,7 @@ export default class TypographyAnimator {
   constructor (
     elementSelector,
     { time, properties, classForActivate, timingFunction, transitionDelay }
-    ) {
+  ) {
     this.TEXT_CSS_CLASS = `animated-text`;
     this.WORD_CSS_CLASS = `animated-text__word`;
     this.DELAY_STEP     = 50;
