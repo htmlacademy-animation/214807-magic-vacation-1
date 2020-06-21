@@ -17,9 +17,8 @@ export default class PrizesAnimator {
     let timeShift = 0;
 
     for (let i = 0; i < this.elements.length; i++) {
-      const source = this.elements[i].querySelector(`source`);
       const img = this.elements[i].querySelector(`img`);
-      const srcset = source.getAttribute(`srcset`);
+      const srcset = img.getAttribute(`data-src`);
       timeShift += this.timeSteps[i];
 
       setTimeout(() => {
