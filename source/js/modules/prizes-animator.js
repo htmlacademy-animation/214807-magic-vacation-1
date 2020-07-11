@@ -1,37 +1,35 @@
 export default class PrizesAnimator {
-
-  constructor (elementSelector, { timeSteps }) {
+  constructor(elementSelector, {timeSteps}) {
     this.elementSelector = elementSelector;
-    this.timeSteps       = timeSteps || null;
-    this.isUntouch       = true;
+    this.timeSteps = timeSteps || null;
+    this.isUntouch = true;
   }
 
-  get elements () {
+  get elements() {
     return document.querySelectorAll(this.elementSelector);
   }
 
-  init () {
+  init() {
     this.correctTimeSteps();
   }
 
-  setSvgToImg () {
+  setSvgToImg() {
     let timeShift = 0;
 
     for (let i = 0; i < this.elements.length; i++) {
-      const source = this.elements[i].querySelector('source');
-      const img    = this.elements[i].querySelector('img');
-      const srcset = source.getAttribute('srcset');
+      const img = this.elements[i].querySelector(`img`);
+      const srcset = img.getAttribute(`data-src`);
       timeShift += this.timeSteps[i];
 
       setTimeout(() => {
-        img.setAttribute('src', `${srcset}?time=${Date.now()}`);
+        img.setAttribute(`src`, `${srcset}?time=${Date.now()}`);
       }, timeShift);
     }
 
     this.touch();
   }
 
-  correctTimeSteps () {
+  correctTimeSteps() {
     if (this.timeSteps === null) {
       this.timeSteps = [];
 
@@ -41,11 +39,11 @@ export default class PrizesAnimator {
     }
   }
 
-  touch () {
+  touch() {
     this.isUntouch = false;
   }
 
-  runAnimation () {
+  runAnimation() {
     if (this.isUntouch) {
       this.setSvgToImg();
     }

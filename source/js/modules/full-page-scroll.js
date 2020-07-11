@@ -1,4 +1,4 @@
-import throttle   from 'lodash/throttle';
+import throttle from 'lodash/throttle';
 import {
   introTitleTypographyAnimator,
   introDateTypographyAnimator,
@@ -59,8 +59,7 @@ export default class FullPageScroll {
     if (this.activeScreen === 0) {
       introTitleTypographyAnimator.runAnimation();
       introDateTypographyAnimator.runAnimation();
-    }
-    else {
+    } else {
       introTitleTypographyAnimator.destroyAnimation();
       introDateTypographyAnimator.destroyAnimation();
     }
