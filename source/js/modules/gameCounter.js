@@ -8,6 +8,8 @@ export default class GameCounter extends StepsAnimation {
   constructor ({ counterMS, fps = 1 }) {
     super({ counterMS: counterMS || 5 * 60 * 1000, fps });
 
+    this.counter = this.limit;
+
     this.gameCounterMinutesElem = null;
     this.gameCounterSecondsElem = null;
     this.messageButtonElem      = null;

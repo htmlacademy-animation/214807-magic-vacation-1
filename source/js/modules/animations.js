@@ -10,7 +10,10 @@ const introDateTypographyAnimator = new TypographyAnimator(
     {time: 1000, properties: [`transform`, `opacity`], transitionDelay: 500},
 );
 
-const prizesAnimator = new PrizesAnimator(`.prizes__item`, {timeSteps: [1000, 4000, 2300]});
+const prizesAnimator = new PrizesAnimator(`.prizes__item`, {
+  timeSteps: [1000, 4000, 2300],
+  durations: [4000, 2300, 1500]
+});
 
 introTitleTypographyAnimator.init();
 introDateTypographyAnimator.init();

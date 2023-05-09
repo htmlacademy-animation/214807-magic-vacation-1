@@ -1,7 +1,6 @@
 export default class StepsAnimation {
   constructor ({ counterMS, fps = 1 }) {
     this.limit     = counterMS || 1000;
-    this.counter   = this.limit;
     this.requestId = null;
 
     this.fpsInterval = 1000 / fps;
@@ -55,8 +54,9 @@ export default class StepsAnimation {
     this.elapsed   = null;
     this.startTime = null;
 
-    this.updateCounterInElem();
+    this.draw();
   }
 
-  draw (elapsed) {}
+  draw (elapsed) {
+  }
 }

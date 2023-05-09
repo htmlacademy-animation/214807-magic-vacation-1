@@ -53,7 +53,7 @@ export default class FullPageScroll {
     this.screenElements[this.activeScreen].classList.add(`active`);
 
     if (this.activeScreen === 2) {
-      prizesAnimator.runAnimation();
+      prizesAnimator.run();
     }
 
     if (this.activeScreen === 0) {
