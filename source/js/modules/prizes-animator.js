@@ -1,35 +1,51 @@
+import PrizeCounter from './PrizeCounter';
+
 export default class PrizesAnimator {
-  constructor(elementSelector, {timeSteps}) {
+  constructor (elementSelector, { timeSteps, durations }) {
     this.elementSelector = elementSelector;
-    this.timeSteps = timeSteps || null;
-    this.isUntouch = true;
+    this.timeSteps       = timeSteps || null;
+    this.durations       = durations || [];
+    this.isUntouch       = true;
   }
 
-  get elements() {
+  get elements () {
     return document.querySelectorAll(this.elementSelector);
   }
 
-  init() {
+  init () {
     this.correctTimeSteps();
   }
 
-  setSvgToImg() {
-    let timeShift = 0;
+  runAnimations () {
+    const counters = [];
+    let timeShift  = 0;
 
     for (let i = 0; i < this.elements.length; i++) {
-      const img = this.elements[i].querySelector(`img`);
+      const img    = this.elements[i].querySelector(`img`);
       const srcset = img.getAttribute(`data-src`);
+
+      const counterElem = this.elements[i].querySelector(`[data-prize-count]`);
+      counters[i]       = new PrizeCounter({
+        elem     : counterElem,
+        maxCount : Number(counterElem.dataset.prizeCount),
+        counterMS: this.durations[i],
+        fps      : 12,
+      });
+
       timeShift += this.timeSteps[i];
+      counters[i].timeShift = timeShift;
 
       setTimeout(() => {
+        const j = i;
         img.setAttribute(`src`, `${srcset}?time=${Date.now()}`);
+        counters[j].start();
       }, timeShift);
     }
 
     this.touch();
   }
 
-  correctTimeSteps() {
+  correctTimeSteps () {
     if (this.timeSteps === null) {
       this.timeSteps = [];
 
@@ -39,13 +55,13 @@ export default class PrizesAnimator {
     }
   }
 
-  touch() {
+  touch () {
     this.isUntouch = false;
   }
 
-  runAnimation() {
+  run () {
     if (this.isUntouch) {
-      this.setSvgToImg();
+      this.runAnimations();
     }
   }
 }
